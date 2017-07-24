@@ -1,0 +1,75 @@
+﻿<Window x:Class="DropDownButton.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:extk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        xmlns:local="clr-namespace:DropDownButton"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}" 
+        mc:Ignorable="d"
+        Title="MainWindow" Height="350" Width="525">
+    <Window.Resources>
+        <x:Array Type="local:Book" x:Key="Books">
+            <local:Book Author="Author 1" Title="Title 1" />
+            <local:Book Author="Author 2" Title="Title 2" />
+            <local:Book Author="Author 3" Title="Title 3" />
+        </x:Array>
+        
+    </Window.Resources>
+    
+    <Grid>
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+            
+            <extk:DropDownButton x:Name="DButton"
+                Tag="{Binding RadioButton_Click}"
+                Width="75" 
+                Height="25" 
+                Margin="10,0,10,0">
+                <extk:DropDownButton.DropDownContent>
+                    <ItemsControl
+                        ItemsSource="{StaticResource Books}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <RadioButton 
+                                    Checked="RadioButton_Checked"
+                                    Tag="{Binding Author}"
+                                    Content="{Binding Title}"
+                                    GroupName="Skins" 
+                                    Margin="5" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </extk:DropDownButton.DropDownContent>
+            </extk:DropDownButton>
+
+            <extk:SplitButton x:Name="SButton" Width="75" Height="25">
+                <extk:SplitButton.DropDownContent>
+                    <ItemsControl
+                        ItemsSource="{StaticResource Books}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <RadioButton 
+                                    Checked="RadioButton_Checked_1"
+                                    Tag="{Binding Author}"
+                                    Content="{Binding Title}"
+                                    GroupName="Skins" 
+                                    Margin="5" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                    </ItemsControl>
+                </extk:SplitButton.DropDownContent>
+            </extk:SplitButton>
+            
+        </StackPanel>
+    </Grid>
+</Window>
