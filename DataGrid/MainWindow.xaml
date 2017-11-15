@@ -1,0 +1,36 @@
+﻿<Window x:Class="DataGrid.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DataGrid"
+        xmlns:models="clr-namespace:DataGrid.Models"
+        mc:Ignorable="d"
+        DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        d:DataContext="{d:DesignInstance {x:Type local:MainWindow}}"
+        Title="MainWindow" Height="350" Width="525">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="30"></ColumnDefinition>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <DockPanel Grid.Column="0">
+            <TextBox Text="Test" Background="Silver"></TextBox>
+        </DockPanel>
+        <DataGrid 
+            VerticalScrollBarVisibility="Auto"
+            EnableColumnVirtualization="True"
+            AutoGenerateColumns="False"
+            EnableRowVirtualization="True"
+            Name="TestGrid"
+            Grid.Column="1" 
+            ItemsSource="{Binding Orders}">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True" MinWidth="50" Width="SizeToHeader"></DataGridTextColumn>
+                <DataGridTextColumn Header="Guid" Binding="{Binding Guid}" IsReadOnly="True" MinWidth="100" Width="SizeToHeader"></DataGridTextColumn>
+                <DataGridTextColumn Header="Name" Binding="{Binding Name}" IsReadOnly="True" MinWidth="200" Width="SizeToHeader"></DataGridTextColumn>
+                <DataGridTextColumn Header="Reference" Binding="{Binding Reference}" IsReadOnly="True" MinWidth="100" Width="Auto"></DataGridTextColumn>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

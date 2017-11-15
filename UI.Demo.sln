@@ -5,6 +5,8 @@ VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DropDownButton", "DropDownButton\DropDownButton.csproj", "{72EB8A0C-C561-4B8D-81BC-E32409C1304A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataGrid", "DataGrid\DataGrid.csproj", "{2EF9D2B0-076E-496B-9A0F-660DB942595F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{72EB8A0C-C561-4B8D-81BC-E32409C1304A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72EB8A0C-C561-4B8D-81BC-E32409C1304A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{72EB8A0C-C561-4B8D-81BC-E32409C1304A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2EF9D2B0-076E-496B-9A0F-660DB942595F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2EF9D2B0-076E-496B-9A0F-660DB942595F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2EF9D2B0-076E-496B-9A0F-660DB942595F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2EF9D2B0-076E-496B-9A0F-660DB942595F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
