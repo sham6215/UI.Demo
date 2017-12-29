@@ -7,88 +7,14 @@ namespace DataGrid
 {
     public class TpNtm
     {
-        public int Number
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
-        }
-
-        public NtmType Type
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
-        }
-
-        public DateTime PublicationDate
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
-        }
-
-        public NtmStatus Status
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
-        }
-
-        public DateTime CancelDate
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
-        }
-
-        public int Id
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
-        }
-
-        public List<Chart> Charts
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
-        }
+        public int Id { get; set; }
+        public int Number { get; set; }
+        public NtmType Type { get; set; }
+        public DateTime? PublicationDate { get; set; }
+        public string PublicationDateShow => PublicationDate?.ToString("yyyy-MM-dd");
+        public NtmStatus Status { get; set; }
+        public DateTime? CancelDate { get; set; }
+        public string CancelDateShow => CancelDate?.ToString("yyyy-MM-dd");
+        public List<Chart> Charts { get; set; }
     }
 }

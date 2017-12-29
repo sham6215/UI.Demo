@@ -1,7 +1,10 @@
 ﻿using DataGrid.Models;
+using DataGrid.Service;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Windows;
 using System.Windows.Controls;
@@ -18,9 +21,35 @@ namespace DataGrid
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
+        /// <summary>
+        /// This list will not be changed an it is the reason why its is List.
+        /// If the list is changable, it should be ObservableCollection
+        /// </summary>
+        List<TpNtm> TpsAll { get; set; } = null;
+        /// <summary>
+        /// This list will not be changed an it is the reason why its is List.
+        /// If the list is changable, it should be ObservableCollection
+        /// </summary>
+        List<Chart> ChartsAll { get; set; } = null;
+
         public List<Order> Orders { get; set; }
+
+        private ListCollectionView _tpsView;
+        public ListCollectionView TpsView
+        {
+            get { return _tpsView; }
+            set { _tpsView = value; }
+        }
+
+        private ListCollectionView _chartsView;
+        public ListCollectionView ChartsView
+        {
+            get { return _chartsView; }
+            set { _chartsView = value; }
+        }
+
 
         public MainWindow()
         {
@@ -28,15 +57,20 @@ namespace DataGrid
             InitializeComponent();
         }
 
+        public event PropertyChangedEventHandler PropertyChanged;
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
         private void Init()
         {
-            Orders = new List<Order>() {
-                new Order() { Id = 1, Guid = "Guid1", Name = "Name1", Reference = "Ref1" },
-                new Order() { Id = 2, Guid = "Guid2", Name = "Name2", Reference = "Ref2" },
-                new Order() { Id = 3, Guid = "Guid3", Name = "Name3", Reference = "Ref3" },
-                new Order() { Id = 4, Guid = "Guid4", Name = "Name4", Reference = "Ref4" },
-                new Order() { Id = 5, Guid = "Guid5", Name = "Name5", Reference = "Ref5" },
-            };
+            TpsAll = GenerateTpNtmService.Instanse.GenerateCharts(50);
+            ChartsAll = GenerateChartService.Instanse.GenerateTpNtms(35);
+            LinkTpNtmsToChartsService.Instanse.LinkTpsToCharts(TpsAll, ChartsAll);
+
+            TpsView = CollectionViewSource.GetDefaultView(TpsAll) as ListCollectionView;
+            ChartsView = CollectionViewSource.GetDefaultView(ChartsAll) as ListCollectionView;
         }
     }
 }

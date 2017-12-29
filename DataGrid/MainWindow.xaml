@@ -8,7 +8,7 @@
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
         d:DataContext="{d:DesignInstance {x:Type local:MainWindow}}"
-        Title="MainWindow" Height="350" Width="525">
+        Title="MainWindow" Height="350" Width="700">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="30"></ColumnDefinition>
@@ -22,14 +22,43 @@
             EnableColumnVirtualization="True"
             AutoGenerateColumns="False"
             EnableRowVirtualization="True"
-            Name="TestGrid"
+            Name="TpsGrid"
             Grid.Column="1" 
-            ItemsSource="{Binding Orders}">
+            ItemsSource="{Binding TpsView}">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Id" Binding="{Binding Id}" IsReadOnly="True" MinWidth="50" Width="SizeToHeader"></DataGridTextColumn>
-                <DataGridTextColumn Header="Guid" Binding="{Binding Guid}" IsReadOnly="True" MinWidth="100" Width="SizeToHeader"></DataGridTextColumn>
-                <DataGridTextColumn Header="Name" Binding="{Binding Name}" IsReadOnly="True" MinWidth="200" Width="SizeToHeader"></DataGridTextColumn>
-                <DataGridTextColumn Header="Reference" Binding="{Binding Reference}" IsReadOnly="True" MinWidth="100" Width="Auto"></DataGridTextColumn>
+                <DataGridTextColumn
+                    Header="Number"
+                    Binding="{Binding Number, Mode=OneWay}"
+                    IsReadOnly="True"
+                    MinWidth="100"
+                    Width="SizeToHeader" />
+                <DataGridTextColumn
+                    Header="PublicationDate"
+                    Binding="{Binding PublicationDateShow, Mode=OneWay}"
+                    IsReadOnly="True"
+                    MinWidth="100"
+                    Width="Auto" />
+                <DataGridTextColumn
+                    Header="Type"
+                    Binding="{Binding Type, Mode=OneWay}"
+                    IsReadOnly="True"
+                    CanUserSort="False"
+                    MinWidth="200"
+                    Width="SizeToHeader" />
+                <DataGridTextColumn
+                    Header="Status"
+                    Binding="{Binding Status, Mode=OneWay}"
+                    IsReadOnly="True"
+                    CanUserSort="False"
+                    MinWidth="200"
+                    Width="SizeToHeader" />
+                <DataGridTextColumn
+                    Header="CancelDate"
+                    Binding="{Binding CancelDateShow, Mode=OneWay}"
+                    IsReadOnly="True"
+                    CanUserSort="False"
+                    MinWidth="200"
+                    Width="SizeToHeader" />
             </DataGrid.Columns>
         </DataGrid>
     </Grid>

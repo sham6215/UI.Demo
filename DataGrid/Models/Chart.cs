@@ -11,17 +11,6 @@ namespace DataGrid
         public int Number { get; set; }
         public DateTime EditionDate { get; set; }
         public string[] Folios { get; set; }
-
-        public List<TpNtm> Tps
-        {
-            get
-            {
-                throw new System.NotImplementedException();
-            }
-
-            set
-            {
-            }
-        }
+        public List<TpNtm> Tps { get; set; }
     }
 }
