@@ -38,7 +38,7 @@ namespace DataGrid.Service
                 Type = id % 2 == 0 ? NtmType.Preliminary : NtmType.Temporary,
                 Status = isCancelled ? NtmStatus.Cancelled : NtmStatus.InForce,
                 CancelDate = isCancelled ? DateTime.Today.AddDays((id%100 + 50) * 7) : default(DateTime?),
-                PublicationDate = DateTime.Today.AddDays((id % 100 + 1) * 7)
+                PublicationDate = DateTime.Today.AddDays((id % 10 + 1) * 7)
             };
         }
     }

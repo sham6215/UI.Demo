@@ -8,23 +8,30 @@
         mc:Ignorable="d"
         DataContext="{Binding RelativeSource={RelativeSource Self}}"
         d:DataContext="{d:DesignInstance {x:Type local:MainWindow}}"
-        Title="MainWindow" Height="350" Width="700">
+        Title="MainWindow" Height="500" Width="700">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="30"></ColumnDefinition>
             <ColumnDefinition Width="*"></ColumnDefinition>
         </Grid.ColumnDefinitions>
-        <DockPanel Grid.Column="0">
-            <TextBox Text="Test" Background="Silver"></TextBox>
-        </DockPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="270" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
         <DataGrid 
             VerticalScrollBarVisibility="Auto"
             EnableColumnVirtualization="True"
             AutoGenerateColumns="False"
             EnableRowVirtualization="True"
+            SelectionMode="Single"
+            IsSynchronizedWithCurrentItem="True"
+            CanUserSortColumns="False"
             Name="TpsGrid"
-            Grid.Column="1" 
-            ItemsSource="{Binding TpsView}">
+            Grid.Column="1"
+            Grid.Row="0"
+            ItemsSource="{Binding TpsView}"
+            PreviewMouseLeftButtonUp="TpsGrid_PreviewMouseLeftButtonUp">
             <DataGrid.Columns>
                 <DataGridTextColumn
                     Header="Number"
@@ -55,6 +62,42 @@
                 <DataGridTextColumn
                     Header="CancelDate"
                     Binding="{Binding CancelDateShow, Mode=OneWay}"
+                    IsReadOnly="True"
+                    CanUserSort="False"
+                    MinWidth="200"
+                    Width="SizeToHeader" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <DataGrid 
+            VerticalScrollBarVisibility="Auto"
+            EnableColumnVirtualization="True"
+            SelectionMode="Single"
+            AutoGenerateColumns="False"
+            EnableRowVirtualization="True"
+            CanUserSortColumns="False"
+            CanUserAddRows="False"
+            Name="TpsChartsGrid"
+            Grid.Column="1"
+            Grid.Row="1"
+            ItemsSource="{Binding TpsChartsView, UpdateSourceTrigger=PropertyChanged}"
+            PreviewMouseLeftButtonUp="TpsChartsGrid_PreviewMouseLeftButtonUp">
+            <DataGrid.Columns>
+                <DataGridTextColumn
+                    Header="Number"
+                    Binding="{Binding Number, Mode=OneWay}"
+                    IsReadOnly="True"
+                    MinWidth="100"
+                    Width="SizeToHeader" />
+                <DataGridTextColumn
+                    Header="EditionDate"
+                    Binding="{Binding EditionDateShow, Mode=OneWay}"
+                    IsReadOnly="True"
+                    MinWidth="100"
+                    Width="Auto" />
+                <DataGridTextColumn
+                    Header="Folios"
+                    Binding="{Binding FoliosShow, Mode=OneWay}"
                     IsReadOnly="True"
                     CanUserSort="False"
                     MinWidth="200"

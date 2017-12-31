@@ -10,7 +10,9 @@ namespace DataGrid
         public int Id { get; set; }
         public int Number { get; set; }
         public DateTime EditionDate { get; set; }
+        public string EditionDateShow => EditionDate.ToString("yyyy-MM-dd");
         public string[] Folios { get; set; }
+        public string FoliosShow => string.Join(",", Folios);
         public List<TpNtm> Tps { get; set; }
     }
 }
