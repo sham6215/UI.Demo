@@ -36,6 +36,36 @@ namespace DataGrid
         /// </summary>
         List<Chart> ChartsAll { get; set; } = null;
 
+        private HoldingsStatus _showHoldingsStatus = HoldingsStatus.All;
+        public HoldingsStatus ShowHoldingsStatus
+        {
+            get { return _showHoldingsStatus; }
+            set
+            {
+                if (_showHoldingsStatus != value)
+                {
+                    _showHoldingsStatus = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        private TpStatus _showTpStatus = TpStatus.All;
+        public TpStatus ShowTpStatus
+        {
+            get { return _showTpStatus; }
+            set
+            {
+                if (_showTpStatus != value)
+                {
+                    _showTpStatus = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        #region Tps View
+
         private ListCollectionView _tpsView;
         public ListCollectionView TpsView
         {
@@ -74,6 +104,8 @@ namespace DataGrid
                 }
             }
         }
+        #endregion
+
         private ListCollectionView _chartsView;
         public ListCollectionView ChartsView
         {
