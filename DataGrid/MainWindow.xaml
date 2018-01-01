@@ -46,20 +46,20 @@
                 <RadioButton
                     GroupName="Charts"
                     Content="All"
-                    IsChecked="{Binding ShowHoldingsStatus, 
+                    IsChecked="{Binding ShowCollectionStatus, 
                                         Mode=TwoWay,
                                         UpdateSourceTrigger=PropertyChanged,
                                         Converter={converters:IntToBoolCompareConverter},
-                                        ConverterParameter={x:Static models:HoldingsStatus.All}}"/>
+                                        ConverterParameter={x:Static models:CollectionShowStatus.All}}"/>
                 
                 <RadioButton
                     GroupName="Charts"
                     Content="Collection"
-                    IsChecked="{Binding ShowHoldingsStatus, 
+                    IsChecked="{Binding ShowCollectionStatus, 
                                         Mode=TwoWay,
                                         UpdateSourceTrigger=PropertyChanged,
                                         Converter={converters:IntToBoolCompareConverter},
-                                        ConverterParameter={x:Static models:HoldingsStatus.InCollection}}"/>
+                                        ConverterParameter={x:Static models:CollectionShowStatus.InCollection}}"/>
             </StackPanel>
 
             <StackPanel 
@@ -72,7 +72,7 @@
                     IsChecked="{Binding ShowTpStatus,
                                         Mode=TwoWay,
                                         UpdateSourceTrigger=PropertyChanged,
-                                        ConverterParameter={x:Static models:TpStatus.All},
+                                        ConverterParameter={x:Static models:TpShowStatus.All},
                                         Converter={converters:IntToBoolCompareConverter}}"/>
                 <RadioButton
                     GroupName="Tps"
@@ -80,7 +80,7 @@
                     IsChecked="{Binding ShowTpStatus,
                                         Mode=TwoWay,
                                         UpdateSourceTrigger=PropertyChanged,
-                                        ConverterParameter={x:Static models:TpStatus.InForce},
+                                        ConverterParameter={x:Static models:TpShowStatus.InForce},
                                         Converter={converters:IntToBoolCompareConverter}}"/>
                 <RadioButton 
                     GroupName="Tps"
@@ -88,7 +88,7 @@
                     IsChecked="{Binding ShowTpStatus,
                                         Mode=TwoWay,
                                         UpdateSourceTrigger=PropertyChanged,
-                                        ConverterParameter={x:Static models:TpStatus.Cancelled},
+                                        ConverterParameter={x:Static models:TpShowStatus.Cancelled},
                                         Converter={converters:IntToBoolCompareConverter}}"/>
             </StackPanel>
         </DockPanel>
@@ -101,6 +101,7 @@
             SelectionMode="Single"
             IsSynchronizedWithCurrentItem="True"
             CanUserSortColumns="False"
+            CanUserAddRows="False"
             Name="TpsGrid"
             Grid.Column="1"
             Grid.Row="1"

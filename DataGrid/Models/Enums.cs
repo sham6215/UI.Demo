@@ -5,14 +5,14 @@ using System.Text;
 
 namespace DataGrid.Models
 {
-    public enum HoldingsStatus : int
+    public enum CollectionShowStatus : int
     {
         All = 0,
         InCollection,
         NotInCollection
     }
 
-    public enum TpStatus : int
+    public enum TpShowStatus : int
     {
         All = 0,
         Cancelled,

@@ -16,5 +16,6 @@ namespace DataGrid
         public DateTime? CancelDate { get; set; }
         public string CancelDateShow => CancelDate?.ToString("yyyy-MM-dd");
         public List<Chart> Charts { get; set; }
+        public bool InCollection => Charts?.Exists(c => c.InCollection) ?? false;
     }
 }

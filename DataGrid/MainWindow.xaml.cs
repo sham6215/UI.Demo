@@ -36,8 +36,8 @@ namespace DataGrid
         /// </summary>
         List<Chart> ChartsAll { get; set; } = null;
 
-        private HoldingsStatus _showHoldingsStatus = HoldingsStatus.All;
-        public HoldingsStatus ShowHoldingsStatus
+        private CollectionShowStatus _showHoldingsStatus = CollectionShowStatus.All;
+        public CollectionShowStatus ShowCollectionStatus
         {
             get { return _showHoldingsStatus; }
             set
@@ -46,12 +46,14 @@ namespace DataGrid
                 {
                     _showHoldingsStatus = value;
                     OnPropertyChanged();
+                    TpsChartsView.Refresh();
+                    TpsView.Refresh();
                 }
             }
         }
 
-        private TpStatus _showTpStatus = TpStatus.All;
-        public TpStatus ShowTpStatus
+        private TpShowStatus _showTpStatus = TpShowStatus.All;
+        public TpShowStatus ShowTpStatus
         {
             get { return _showTpStatus; }
             set
@@ -60,6 +62,7 @@ namespace DataGrid
                 {
                     _showTpStatus = value;
                     OnPropertyChanged();
+                    TpsView?.Refresh();
                 }
             }
         }
@@ -87,7 +90,7 @@ namespace DataGrid
         }
 
         public ObservableCollection<Chart> ObsTpsCharts { get; set; } = new ObservableCollection<Chart>(new List<Chart>());
-      
+
         private ListCollectionView _tpsChartsView;
         public ListCollectionView TpsChartsView
         {
@@ -133,6 +136,8 @@ namespace DataGrid
             LinkTpNtmsToChartsService.Instanse.LinkTpsToCharts(TpsAll, ChartsAll);
 
             TpsChartsView = CollectionViewSource.GetDefaultView(ObsTpsCharts) as ListCollectionView;
+            TpsChartsView.Filter = ChartsViewFilter;
+
             TpsView = CollectionViewSource.GetDefaultView(TpsAll) as ListCollectionView;
             TpsView.CurrentChanged += (s, e) =>
             {
@@ -142,9 +147,78 @@ namespace DataGrid
                 CurrentTpNtm?.Charts.ForEach(c => ObsTpsCharts.Add(c));
                 TpsChartsView.Refresh();
             };
+            TpsView.Filter = TpsViewFilter;
 
 
             ChartsView = CollectionViewSource.GetDefaultView(ChartsAll) as ListCollectionView;
+        }
+
+        private bool ChartsViewFilter(object obj)
+        {
+            Chart chart = obj as Chart;
+            bool show = true;
+            if (chart != null)
+            {
+                /// Checking Tp status: Cancelled, InForce
+                if (show)
+                {
+                    if ((ShowCollectionStatus == CollectionShowStatus.InCollection && !chart.InCollection) ||
+                        (ShowCollectionStatus == CollectionShowStatus.NotInCollection && chart.InCollection))
+                    {
+                        show &= false;
+                    }
+                }
+            }
+            else
+            {
+                show &= false;
+            }
+            return show;
+        }
+
+        private bool TpsViewFilter(object obj)
+        {
+            TpNtm tp = obj as TpNtm;
+            bool show = true;
+            if (tp != null)
+            {
+                if (show)
+                {
+                    if (ShowTpStatus != TpShowStatus.All)
+                    {
+                        var status = Convert(tp.Status);
+                        if (status == null || ShowTpStatus != status)
+                        {
+                            show &= false;
+                        }
+                    }
+                }
+
+
+                /// Checking Tp InCollection Status
+                if (show)
+                {
+                    if ((ShowCollectionStatus == CollectionShowStatus.InCollection && !tp.InCollection) ||
+                        (ShowCollectionStatus == CollectionShowStatus.NotInCollection && tp.InCollection))
+                    {
+                        show &= false;
+                    }
+                }
+            }
+            else
+            {
+                show = false;
+            }
+            return show;
+        }
+
+        private TpShowStatus? Convert(NtmStatus ntmStatus)
+        {
+            if (ntmStatus == NtmStatus.Cancelled)
+                return TpShowStatus.Cancelled;
+            if (ntmStatus == NtmStatus.InForce)
+                return TpShowStatus.InForce;
+            return null;
         }
 
         private void TpsGrid_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
@@ -195,8 +269,8 @@ namespace DataGrid
         private DataGridColumnHeader GetColumnHeaderFromElement(object source)
         {
             DependencyObject dep = source as DependencyObject;
-            while ((dep != null) 
-                && !(dep is DataGridCell) 
+            while ((dep != null)
+                && !(dep is DataGridCell)
                 && !(dep is DataGridColumnHeader))
             {
                 dep = VisualTreeHelper.GetParent(dep);

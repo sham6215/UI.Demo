@@ -12,6 +12,7 @@ namespace DataGrid
         public DateTime EditionDate { get; set; }
         public string EditionDateShow => EditionDate.ToString("yyyy-MM-dd");
         public string[] Folios { get; set; }
+        public bool InCollection => Folios?.Count() > 0;
         public string FoliosShow => string.Join(",", Folios);
         public List<TpNtm> Tps { get; set; }
     }

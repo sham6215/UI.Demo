@@ -28,8 +28,10 @@ namespace DataGrid.Service
 
         public Chart GenerateChart(int id = 1)
         {
+            int foliosCount = id % 7 == 0 ? 1 : (id % 8 == 0 ? 2 : 0);
+
             var folios = Enumerable
-                .Range(1, id%3)
+                .Range(1, foliosCount)
                 .Select(i => i > 0 ? i.ToString() : null)
                 .Where(i => !string.IsNullOrEmpty(i))
                 .ToArray();
